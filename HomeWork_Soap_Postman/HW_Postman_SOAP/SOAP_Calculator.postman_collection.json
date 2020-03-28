@@ -1,0 +1,328 @@
+{
+	"info": {
+		"_postman_id": "66292d93-f158-4d46-8f51-eb5f00ba8aea",
+		"name": "SOAP_Calculator",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3f3e5c9f-948d-4990-9654-5aefad497ced",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"<AddResult>11</AddResult>\");",
+							"});",
+							"",
+							"",
+							"var response = xml2Json(responseBody);",
+							"var result = (response[\"soap:Envelope\"][\"soap:Body\"][\"AddResponse\"][\"AddResult\"]);",
+							"pm.collectionVariables.set(\"var_add\", result);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/soap+xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soap:Envelope xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:tem=\"http://tempuri.org/\">\n    <soap:Header/>\n    <soap:Body>\n        <tem:Add>\n            <tem:intA>{{var1}}</tem:intA>\n            <tem:intB>{{var2}}</tem:intB>\n        </tem:Add>\n    </soap:Body>\n</soap:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://www.dneonline.com/calculator.asmx",
+					"protocol": "http",
+					"host": [
+						"www",
+						"dneonline",
+						"com"
+					],
+					"path": [
+						"calculator.asmx"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Divide",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3f3e5c9f-948d-4990-9654-5aefad497ced",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"<DivideResult>2</DivideResult>\");",
+							"});",
+							"",
+							"var response = xml2Json(responseBody);",
+							"var result = (response[\"soap:Envelope\"][\"soap:Body\"][\"DivideResponse\"][\"DivideResult\"]);",
+							"pm.collectionVariables.set(\"var_divide\", result);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/soap+xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soap:Envelope xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:tem=\"http://tempuri.org/\">\r\n   <soap:Header/>\r\n   <soap:Body>\r\n      <tem:Divide>\r\n         <tem:intA>7</tem:intA>\r\n         <tem:intB>4</tem:intB>\r\n      </tem:Divide>\r\n   </soap:Body>\r\n</soap:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://www.dneonline.com/calculator.asmx",
+					"protocol": "http",
+					"host": [
+						"www",
+						"dneonline",
+						"com"
+					],
+					"path": [
+						"calculator.asmx"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Multiply",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3f3e5c9f-948d-4990-9654-5aefad497ced",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"<MultiplyResult>28</MultiplyResult>\");",
+							"});",
+							"",
+							"var response = xml2Json(responseBody);",
+							"var result = (response[\"soap:Envelope\"][\"soap:Body\"][\"MultiplyResponse\"][\"MultiplyResult\"]);",
+							"pm.collectionVariables.set(\"var_multiply\", result);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/soap+xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soap:Envelope xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:tem=\"http://tempuri.org/\">\r\n   <soap:Header/>\r\n   <soap:Body>\r\n      <tem:Multiply>\r\n         <tem:intA>7</tem:intA>\r\n         <tem:intB>4</tem:intB>\r\n      </tem:Multiply>\r\n   </soap:Body>\r\n</soap:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://www.dneonline.com/calculator.asmx",
+					"protocol": "http",
+					"host": [
+						"www",
+						"dneonline",
+						"com"
+					],
+					"path": [
+						"calculator.asmx"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Substract",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3f3e5c9f-948d-4990-9654-5aefad497ced",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"<SubtractResult>3</SubtractResult>\");",
+							"});",
+							"",
+							"",
+							"var response = xml2Json(responseBody);",
+							"var result = (response[\"soap:Envelope\"][\"soap:Body\"][\"SubtractResponse\"][\"SubtractResult\"]);",
+							"pm.collectionVariables.set(\"var_subtract\", result);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/soap+xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soap:Envelope xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:tem=\"http://tempuri.org/\">\r\n   <soap:Header/>\r\n   <soap:Body>\r\n      <tem:Subtract>\r\n         <tem:intA>7</tem:intA>\r\n         <tem:intB>4</tem:intB>\r\n      </tem:Subtract>\r\n   </soap:Body>\r\n</soap:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://www.dneonline.com/calculator.asmx",
+					"protocol": "http",
+					"host": [
+						"www",
+						"dneonline",
+						"com"
+					],
+					"path": [
+						"calculator.asmx"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "e81d00f7-7fb6-4606-9cc9-c011fe7defec",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "9296ae4f-3641-42d7-a069-05bc3643c9f9",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "22079cd5-2861-4de6-955b-eb1e380a9603",
+			"key": "var1",
+			"value": "7",
+			"type": "string"
+		},
+		{
+			"id": "1cc51122-87ee-4d3b-b494-90e12004c66f",
+			"key": "var2",
+			"value": "4",
+			"type": "string"
+		},
+		{
+			"id": "e38c278c-0ee9-4439-ac5c-683b881fd8c1",
+			"key": "var_add",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "2a282ce1-1b76-45d1-884b-2d6cbcadf9c2",
+			"key": "var_divide",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "588e5ecf-6ff4-456d-ab2e-c13734813bfe",
+			"key": "var_multiply",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "99436f31-1599-4a0d-927a-2bed69345068",
+			"key": "var_subtract",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
